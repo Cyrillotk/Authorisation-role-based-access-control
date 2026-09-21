@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Manage Users</title>
+</head>
+<body>
+
+  <h1>Manage Users</h1>
+
+  <% users.forEach(user => { %>
+
+    <div>
+      <strong><%= user.username %></strong>
+      <p><%= user.email %></p>
+      <p>Role: <%= user.role %></p>
+    </div>
+
+    <hr>
+
+  <% }) %>
+
+  <a href="/dashboard">Back to Dashboard</a>
+
+</body>
+</html>

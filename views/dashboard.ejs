@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+</head>
+<body>
+
+  <h1>Dashboard</h1>
+
+  <p>Welcome, <%= user.username %></p>
+  <p>Your role: <strong><%= user.role %></strong></p>
+
+  <% if (user.role === 'admin') { %>
+    <a href="/admin/users">Manage Users</a>
+  <% } %>
+
+  <% if (user.role === 'admin' || user.role === 'staff') { %>
+    <a href="/staff">Staff Area</a>
+  <% } %>
+
+  <br><br>
+
+  <a href="/logout">Logout</a>
+
+</body>
+</html>
