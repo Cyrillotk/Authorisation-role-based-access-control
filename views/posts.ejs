@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Posts</title>
+</head>
+<body>
+
+  <h1>Posts</h1>
+
+  <a href="/posts/create">Create Post</a>
+
+  <form action="/posts" method="GET">
+
+    <input
+      type="text"
+      name="search"
+      placeholder="Search..."
+      value="<%= search %>"
+    >
+
+    <select name="category">
+      <option value="">All Categories</option>
+
+      <option
+        value="technology"
+        <%= category === 'technology' ? 'selected' : '' %>
+      >
+        Technology
+      </option>
+
+      <option
+        value="business"
+        <%= category === 'business' ? 'selected' : '' %>
+      >
+        Business
+      </option>
+
+      <option
+        value="education"
+        <%= category === 'education' ? 'selected' : '' %>
+      >
+        Education
+      </option>
+    </select>
+
+    <select name="sort">
+
+      <option
+        value="newest"
+        <%= sort === 'newest' ? 'selected' : '' %>
+      >
+        Newest
+      </option>
+
+      <option
+        value="oldest"
+        <%= sort === 'oldest' ? 'selected' : '' %>
+      >
+        Oldest
+      </option>
+
+      <option
+        value="title"
+        <%= sort === 'title' ? 'selected' : '' %>
+      >
+        Title
+      </option>
+
+    </select>
+
+    <button type="submit">Apply</button>
+
+  </form>
+
+  <hr>
+
+  <% if (posts.length === 0) { %>
+
+    <p>No posts found.</p>
+
+  <% } %>
+
+  <% posts.forEach(post => { %>
+
+    <article>
+
+      <h2><%= post.title %></h2>
+
+      <p><%= post.content %></p>
+
+      <p>Category: <%= post.category %></p>
+
+      <p>
+        Created by:
+        <%= post.owner.username %>
+      </p>
+
+      <a href="/posts/<%= post._id %>/edit">
+        Edit
+      </a>
+
+      <% if (
+        post.owner._id.toString() === user.id.toString() ||
+        user.role === 'admin'
+      ) { %>
+
+        <form
+          action="/posts/<%= post._id %>/delete"
+          method="POST"
+          style="display:inline"
+        >
+          <button type="submit">Delete</button>
+        </form>
+
+      <% } %>
+
+    </article>
+
+    <hr>
+
+  <% }) %>
+
+  <div>
+
+    <% if (currentPage > 1) { %>
+
+      <a href="/posts?page=<%= currentPage - 1 %>&search=<%= search %>&category=<%= category %>&sort=<%= sort %>">
+        Previous
+      </a>
+
+    <% } %>
+
+    <span>
+      Page <%= currentPage %> of <%= totalPages || 1 %>
+    </span>
+
+    <% if (currentPage < totalPages) { %>
+
+      <a href="/posts?page=<%= currentPage + 1 %>&search=<%= search %>&category=<%= category %>&sort=<%= sort %>">
+        Next
+      </a>
+
+    <% } %>
+
+  </div>
+
+</body>
+</html>

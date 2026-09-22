@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Create Post</title>
+</head>
+<body>
+
+  <h1>Create Post</h1>
+
+  <% if (typeof error !== 'undefined') { %>
+    <p><%= error %></p>
+  <% } %>
+
+  <form action="/posts" method="POST">
+
+    <input
+      type="text"
+      name="title"
+      placeholder="Title"
+      required
+    >
+
+    <textarea
+      name="content"
+      placeholder="Content"
+      required
+    ></textarea>
+
+    <select name="category" required>
+
+      <option value="">Select category</option>
+      <option value="technology">Technology</option>
+      <option value="business">Business</option>
+      <option value="education">Education</option>
+
+    </select>
+
+    <button type="submit">Create Post</button>
+
+  </form>
+
+  <a href="/posts">Back to Posts</a>
+
+</body>
+</html>

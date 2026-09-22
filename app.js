@@ -7,7 +7,7 @@ const connectDB = require('./config/db');
 
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
-
+const postRoutes = require('./routes/postRoutes');
 const app = express();
 
 connectDB();
@@ -31,7 +31,7 @@ app.get('/', (req, res) => {
 
 app.use('/', authRoutes);
 app.use('/', userRoutes);
-
+app.use('/', postRoutes);
 app.use((req, res) => {
   res.status(404).render('error', {
     message: 'Page not found.'
